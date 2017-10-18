@@ -1,0 +1,39 @@
+# File generated with BB pin configurator
+# title: BeBoPr-Bridge
+overlay cape-universal
+overlay cape-bone-iio
+P8_7 high #Enable_n (ECO location)
+P8_8 in #X_Min
+P8_9 in #X_Max
+P8_10 in #Y_Min
+P8_11 low #X_Dir
+P8_12 low #X_Step
+P8_13 low #PWM0
+P8_14 in #Y_Max
+P8_15 low #Y_Dir
+P8_16 low #Y_Step
+P8_17 in #Z_Min
+P8_18 in #Z_Max
+P8_19 low #PWM1
+P8_26 low #Status
+P9_11 default
+P9_12 default
+P9_13 default
+P9_14 low #PWM2
+P9_15 low #Z_Step
+P9_16 default
+P9_17 low #B_Dir
+P9_18 low #B_Step
+P9_21 low #A_Dir
+P9_22 low #A_Step
+P9_23 low #Z_Dir
+P9_24 low #Spindle
+P9_25 default
+P9_26 low #Mtr_Enable
+P9_27 default
+P9_28 default
+P9_29 default
+P9_30 default
+P9_31 default
+P9_41 default
+P9_42 default

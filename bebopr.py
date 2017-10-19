@@ -32,7 +32,7 @@ def init_hardware():
                 interval=0.05,
                 filter_size=1,
                 cape_board='BeBoPr',
-                channels='04:%s,05:%s'
+                channels='01:%s,03:%s,05:%s'
                 % (c.find('HBP', 'THERMISTOR', defaultThermistor),
                    c.find('EXTRUDER_0', 'THERMISTOR', defaultThermistor)),
                 wait_name='temp')
@@ -46,9 +46,9 @@ def init_hardware():
 def setup_hardware(thread):
     # PWM
     hal.Pin('hpg.pwmgen.00.pwm_period').set(100000000)  # 1000Hz
-    hal.Pin('hpg.pwmgen.00.out.00.pin').set(813)
-    hal.Pin('hpg.pwmgen.00.out.01.pin').set(819)
-    hal.Pin('hpg.pwmgen.00.out.02.pin').set(914)
+    hal.Pin('hpg.pwmgen.00.out.00.pin').set(836)  # J4 HBP
+    hal.Pin('hpg.pwmgen.00.out.01.pin').set(846)  # J2 E0
+    hal.Pin('hpg.pwmgen.00.out.02.pin').set(845)  # J3 F0
     # HBP
     hal.Pin('hpg.pwmgen.00.out.00.enable').set(True)
     hal.Pin('hpg.pwmgen.00.out.00.value').link('hbp-temp-pwm')
@@ -72,43 +72,47 @@ def setup_hardware(thread):
     # none
 
     # GPIO
-    hal.Pin('bb_gpio.p8.in-07').link('limit-0-home')   # X
-    hal.Pin('bb_gpio.p8.in-08').link('limit-0-min')    # X
-    hal.Pin('bb_gpio.p8.in-09').link('limit-1-home')   # Y
-    hal.Pin('bb_gpio.p8.in-10').link('limit-1-min')    # Y
-    hal.Pin('bb_gpio.p9.in-11').link('limit-2-home')   # Z
-    hal.Pin('bb_gpio.p9.in-13').link('limit-2-min')    # Z
+    hal.Pin('bb_gpio.p8.in-31').link('limit-0-home')   # X
+    hal.Pin('bb_gpio.p8.in-32').link('limit-0-max')    # X
+    hal.Pin('bb_gpio.p8.in-35').link('limit-1-home')   # Y
+    hal.Pin('bb_gpio.p8.in-33').link('limit-1-max')    # Y
+    hal.Pin('bb_gpio.p9.in-38').link('limit-2-home')   # Z
+    hal.Pin('bb_gpio.p9.in-37').link('limit-2-max')    # Z
     # probe ...
 
     # Adjust as needed for your switch polarity
-    hal.Pin('bb_gpio.p8.in-08.invert').set(False)
-    hal.Pin('bb_gpio.p8.in-07.invert').set(False)
-    hal.Pin('bb_gpio.p8.in-10.invert').set(False)
-    hal.Pin('bb_gpio.p8.in-09.invert').set(False)
-    hal.Pin('bb_gpio.p9.in-13.invert').set(False)
-    hal.Pin('bb_gpio.p9.in-11.invert').set(False)
+    hal.Pin('bb_gpio.p8.in-31.invert').set(False)
+    hal.Pin('bb_gpio.p8.in-32.invert').set(False)
+    hal.Pin('bb_gpio.p8.in-35.invert').set(False)
+    hal.Pin('bb_gpio.p8.in-33.invert').set(False)
+    hal.Pin('bb_gpio.p9.in-38.invert').set(False)
+    hal.Pin('bb_gpio.p9.in-37.invert').set(False)
 
     # ADC
-    hal.Pin('temp.ch-04.value').link('hbp-temp-meas')
-    hal.Pin('temp.ch-05.value').link('e0-temp-meas')
-    hal.Pin('temp.ch-02.value').link('e1-temp-meas')
-    hal.Pin('temp.ch-03.value').link('e2-temp-meas')
+    hal.Pin('temp.ch-01.value').link('hbp-temp-meas')
+    hal.Pin('temp.ch-03.value').link('e0-temp-meas')
+    hal.Pin('temp.ch-05.value').link('e1-temp-meas')
 
     # Stepper
-    hal.Pin('hpg.stepgen.00.steppin').set(812)
-    hal.Pin('hpg.stepgen.00.dirpin').set(811)
-    hal.Pin('hpg.stepgen.01.steppin').set(816)
-    hal.Pin('hpg.stepgen.01.dirpin').set(815)
-    hal.Pin('hpg.stepgen.02.steppin').set(915)
-    hal.Pin('hpg.stepgen.02.dirpin').set(923)
-    hal.Pin('hpg.stepgen.03.steppin').set(922)
-    hal.Pin('hpg.stepgen.03.dirpin').set(921)
-    hal.Pin('hpg.stepgen.04.steppin').set(918)
-    hal.Pin('hpg.stepgen.04.dirpin').set(917)
+    hal.Pin('hpg.stepgen.00.steppin').set(843)
+    hal.Pin('hpg.stepgen.00.dirpin').set(844)
+    hal.Pin('hpg.stepgen.01.steppin').set(842)
+    hal.Pin('hpg.stepgen.01.dirpin').set(839)
+    hal.Pin('hpg.stepgen.02.steppin').set(827)
+    hal.Pin('hpg.stepgen.02.dirpin').set(829)
+    hal.Pin('hpg.stepgen.03.steppin').set(830)
+    hal.Pin('hpg.stepgen.03.dirpin').set(821)
 
-    # machine power
-    hal.Pin('bb_gpio.p9.out-26').link('emcmot-0-enable')
-    #hal.Pin('bb_gpio.p9.out-23.invert').set(True)
+    # axis enable signals
+    hal.Pin('bb_gpio.p8.out-41').link('emcmot-0-enable')
+    hal.Pin('bb_gpio.p8.out-41.invert').set(True)
+    hal.Pin('bb_gpio.p8.out-40').link('emcmot-1-enable')
+    hal.Pin('bb_gpio.p8.out-40.invert').set(True)
+    hal.Pin('bb_gpio.p8.out-28').link('emcmot-2-enable')
+    hal.Pin('bb_gpio.p8.out-28.invert').set(True)
+    hal.Pin('bb_gpio.p8.out-20').link('emcmot-3-enable')
+    hal.Pin('bb_gpio.p8.out-20.invert').set(True)
+
     # Monitor estop input from hardware
     hal.Pin('bb_gpio.p8.in-17').link('estop-in')
     hal.Pin('bb_gpio.p8.in-17.invert').set(True)
@@ -116,10 +120,19 @@ def setup_hardware(thread):
     hal.Pin('bb_gpio.p8.out-26').link('estop-out')
     hal.Pin('bb_gpio.p8.out-26.invert').set(True)
 
+    # Machine power (BeBoPr Enable)
+    hal.Pin('bb_gpio.p8.out-03').link('estop-loop')
+    hal.Pin('bb_gpio.p8.out-05').link('estop-loop')
+    hal.Pin('bb_gpio.p8.out-05.invert').set(True)
+    # BeBoPr ECO locations for enable signalsto avoid eMMC noise on startup:
+    # Enable (P8.7) tied to system Reset_n line (P9.10)
+    hal.Pin('bb_gpio.p8.out-07').link('estop-loop')
+    hal.Pin('bb_gpio.p8.out-07.invert').set(True)
+
     # Tie machine power signal to the BeBoPr LED
     # Feel free to tie any other signal you like to the LED
     hal.Pin('bb_gpio.p8.out-26').link('emcmot-0-enable')
-    # hal.Pin('bb_gpio.p9.out-25.invert').set(True)
+
 
 def setup_exp(name):
     hal.newsig('%s-pwm' % name, hal.HAL_FLOAT, init=0.0)

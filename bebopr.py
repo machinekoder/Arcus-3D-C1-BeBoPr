@@ -32,7 +32,7 @@ def init_hardware():
                 interval=0.05,
                 filter_size=1,
                 cape_board='BeBoPr',
-                channels='01:%s,03:%s,05:%s'
+                channels='01:%s,03:%s'
                 % (c.find('HBP', 'THERMISTOR', defaultThermistor),
                    c.find('EXTRUDER_0', 'THERMISTOR', defaultThermistor)),
                 wait_name='temp')

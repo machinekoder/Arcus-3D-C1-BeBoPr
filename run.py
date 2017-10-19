@@ -25,7 +25,7 @@ try:
 
     launcher.ensure_mklauncher()  # ensure mklauncher is started
 
-    launcher.start_process("configserver -n 'Arcus-3D-C1 ~/Machineface")
+    launcher.start_process("configserver -n 'Arcus-3D-C1' ~/Machineface")
     launcher.start_process('machinekit arcus-3d-c1.ini')
     while True:
         launcher.check_processes()

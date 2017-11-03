@@ -19,7 +19,7 @@ def init_hardware():
     watchList = []
 
     # load low-level drivers
-    rt.loadrt('hal_bb_gpio', output_pins='803,805,807,820,825,828,840,841', input_pins='831,832,833,835,837,838')
+    rt.loadrt('hal_bb_gpio', output_pins='807,808,809,810,819,828,840,841', input_pins='831,832,833,835,837,838')
     prubin = '%s/%s' % (c.Config().EMC2_RTLIB_DIR, c.find('PRUCONF', 'PRUBIN'))
     rt.loadrt(c.find('PRUCONF', 'DRIVER'),
               pru=0, num_stepgens=4, num_pwmgens=3,
@@ -101,7 +101,7 @@ def setup_hardware(thread):
     hal.Pin('hpg.stepgen.02.steppin').set(827)
     hal.Pin('hpg.stepgen.02.dirpin').set(829)
     hal.Pin('hpg.stepgen.03.steppin').set(830)
-    hal.Pin('hpg.stepgen.03.dirpin').set(821)
+    hal.Pin('hpg.stepgen.03.dirpin').set(834)
 
     # axis enable signals
     hal.Pin('bb_gpio.p8.out-41').link('emcmot-0-enable')
@@ -110,13 +110,13 @@ def setup_hardware(thread):
     hal.Pin('bb_gpio.p8.out-40.invert').set(True)
     hal.Pin('bb_gpio.p8.out-28').link('emcmot-2-enable')
     hal.Pin('bb_gpio.p8.out-28.invert').set(True)
-    hal.Pin('bb_gpio.p8.out-20').link('emcmot-3-enable')
-    hal.Pin('bb_gpio.p8.out-20.invert').set(True)
+    hal.Pin('bb_gpio.p8.out-19').link('emcmot-3-enable')
+    hal.Pin('bb_gpio.p8.out-19.invert').set(True)
 
     # Machine power (BeBoPr Enable)
-    hal.Pin('bb_gpio.p8.out-03').link('estop-loop')
-    hal.Pin('bb_gpio.p8.out-05').link('estop-loop')
-    hal.Pin('bb_gpio.p8.out-05.invert').set(True)
+    hal.Pin('bb_gpio.p8.out-08').link('estop-loop')
+    hal.Pin('bb_gpio.p8.out-09').link('estop-loop')
+    hal.Pin('bb_gpio.p8.out-09.invert').set(True)
     # BeBoPr ECO locations for enable signalsto avoid eMMC noise on startup:
     # Enable (P8.7) tied to system Reset_n line (P9.10)
     hal.Pin('bb_gpio.p8.out-07').link('estop-loop')
@@ -124,7 +124,7 @@ def setup_hardware(thread):
 
     # Tie machine power signal to the BeBoPr LED
     # Feel free to tie any other signal you like to the LED
-    hal.Pin('bb_gpio.p8.out-25').link('emcmot-0-enable')
+    hal.Pin('bb_gpio.p8.out-10').link('emcmot-0-enable')
 
 
 def setup_exp(name):

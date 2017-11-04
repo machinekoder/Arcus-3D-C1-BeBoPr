@@ -9,7 +9,7 @@ from machinekit import config
 
 
 launcher.register_exit_handler()
-launcher.set_debug_level(9)
+#launcher.set_debug_level(9)
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 launcher.set_machinekit_ini(config.MACHINEKIT_INI)
 

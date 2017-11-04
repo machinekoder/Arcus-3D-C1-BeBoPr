@@ -19,7 +19,7 @@ def init_hardware():
     watchList = []
 
     # load low-level drivers
-    rt.loadrt('hal_bb_gpio', output_pins='807,808,809,810,819,828,840,841', input_pins='831,832,833,835,837,838')
+    rt.loadrt('hal_bb_gpio', output_pins='807,808,810,819,828,840,841', input_pins='809,831,832,833,835,837,838')
     prubin = '%s/%s' % (c.Config().EMC2_RTLIB_DIR, c.find('PRUCONF', 'PRUBIN'))
     rt.loadrt(c.find('PRUCONF', 'DRIVER'),
               pru=0, num_stepgens=4, num_pwmgens=3,
@@ -113,14 +113,12 @@ def setup_hardware(thread):
     hal.Pin('bb_gpio.p8.out-19').link('emcmot-3-enable')
     hal.Pin('bb_gpio.p8.out-19.invert').set(True)
 
-    # Machine power (BeBoPr Enable)
+    # Machine power 
     hal.Pin('bb_gpio.p8.out-08').link('estop-loop')
-    hal.Pin('bb_gpio.p8.out-09').link('estop-loop')
-    hal.Pin('bb_gpio.p8.out-09.invert').set(True)
-    # BeBoPr ECO locations for enable signalsto avoid eMMC noise on startup:
-    # Enable (P8.7) tied to system Reset_n line (P9.10)
-    hal.Pin('bb_gpio.p8.out-07').link('estop-loop')
-    hal.Pin('bb_gpio.p8.out-07.invert').set(True)
+    hal.Pin('bb_gpio.p8.in-09').link('estop-in')
+    #hal.Pin('bb_gpio.p8.in-09.invert').set(True)
+    hal.Pin('bb_gpio.p8.out-07').link('estop-out')
+    #hal.Pin('bb_gpio.p8.out-07.invert').set(True)
 
     # Tie machine power signal to the BeBoPr LED
     # Feel free to tie any other signal you like to the LED

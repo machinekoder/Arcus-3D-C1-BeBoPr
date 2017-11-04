@@ -6,10 +6,10 @@ overlay cape-universala
 #P8_4 default
 #P8_5 gpio #old enablen
 #P8_6 default
-P8_7 high #Enable_n
+P8_7 high #ESTOP Out
 P8_8 gpio #BeBoPr enable new
-P8_9 gpio #BeBoPr enable new
-P8_10 gpio #LED new
+P8_9 gpio #ESTOP In
+P8_10 gpio #Machine Power
 #P8_11 default
 #P8_12 default
 P8_13 default

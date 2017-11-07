@@ -78,6 +78,7 @@ for i in range(0, numLights):
 errorSignals = ['temp-hw-error', 'watchdog-error', 'hbp-error']
 for i in range(0, numExtruders):
     errorSignals.append('e%i-error' % i)
+#errorSignals = []
 base.setup_estop(errorSignals, thread='servo-thread')
 base.setup_tool_loopback()
 # Probe

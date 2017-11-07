@@ -2,70 +2,31 @@
 # title: BeBoPr
 overlay cape-bone-iio
 overlay cape-universala
-P8_3 gpio #old enable
-P8_4 default
-P8_5 gpio #old enablen
-P8_6 default
-P8_7 high #Enable_n
-P8_8 default
-P8_9 default
-P8_10 default
-P8_11 default
-P8_12 default
-P8_13 default
-P8_14 default
-P8_15 default
-P8_16 default
-P8_17 default
-P8_18 default
-P8_19 default
-P8_20 gpio #E_ENA
-P8_21 gpio #E_DIR
-P8_22 default
-P8_23 default
-P8_24 default
-P8_25 gpio #LED
-P8_26 default
-P8_27 gpio #Z_STP
-P8_28 gpio #Z_ENA
-P8_29 gpio #Z_DIR
-P8_30 gpio #E_STP
-P8_31 gpio #X_MIN
-P8_32 gpio #X_MAX
-P8_33 gpio #Y_MAX
-P8_34 default
-P8_35 gpio #Y_MIN
-P8_36 gpio #J4_PWM
-P8_37 gpio #Z_MAX
-P8_38 gpio #Z_MIN
-P8_39 gpio #Y_DIR
-P8_40 gpio_pd #Y_ENA
-P8_41 gpio_pd #X_ENA
-P8_42 gpio #Y_STP
-P8_43 gpio #X_STP
-P8_44 gpio #X_DIR
-P8_45 gpio #J3_PWM
-P8_46 gpio #J2_PWM
-P9_11 default
-P9_12 default
-P9_13 default
-P9_14 default
-P9_15 default
-P9_16 default
-P9_17 default
-P9_18 default
-P9_21 default
-P9_22 default
-P9_23 default
-P9_24 default
-P9_25 default
-P9_26 default
-P9_27 default
-P9_28 default
-P9_29 default
-P9_30 default
-P9_31 default
-P9_41 default
-P9_42 default
-P9_91 default
-P9_92 default
+P8_7 low #ESTOP Out
+P8_8 gpio #BeBoPr enable new
+P8_9 in #ESTOP In
+P8_10 gpio #Machine Power
+P8_19 low #E_ENA New 
+P8_27 low #Z_STP
+P8_28 low #Z_ENA
+P8_29 low #Z_DIR
+P8_30 low #E_STP
+P8_31 in #X_MIN
+P8_32 in #X_MAX
+P8_33 in #Y_MAX
+P8_34 low #E_DIR new
+P8_35 in #Y_MIN
+P8_36 low #J4_PWM
+P8_37 in #Z_MAX
+P8_38 in #Z_MIN
+P8_39 low #Y_DIR
+P8_40 low #Y_ENA
+P8_41 low #X_ENA
+P8_42 low #Y_STP
+P8_43 low #X_STP
+P8_44 low #X_DIR
+P8_45 low #J3_PWM
+P8_46 low #J2_PWM
+
+P9_91 in
+P9_92 in
